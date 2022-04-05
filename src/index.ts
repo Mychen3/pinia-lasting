@@ -32,19 +32,15 @@ const moveStorage = (storageKey: string, store: PiniaPluginContext["store"], sto
 
 
 const subscribe = (storageKey: string, store: PiniaPluginContext["store"]) => {
-    const storage = getStorage(storageKey) ? JSON.parse(getStorage(storageKey) as string) : ''
     store.$subscribe((subscribeObject) => {
-        if (storage && storage !== '') {
-            const {newValue,key} = subscribeObject.events
+            const {newValue,key,oldValue} = subscribeObject.events
             const storeId = subscribeObject.storeId
-
             if (subscribeObject.events.type !== 'set') return
-            if (newValue !== storage[key]) {
-                const oid = subscribeObject.events.target
-                oid[key] = newValue
-                setStorage(storeId, oid)
+            if (newValue !== oldValue) {
+                const target = subscribeObject.events.target
+                target[key] = newValue
+                setStorage(storeId, target)
             }
-        }
     })
 }
 
