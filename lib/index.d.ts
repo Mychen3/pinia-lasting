@@ -1,2 +1,2 @@
-import type { PiniaPluginContext } from 'pinia';
-export declare const piniaPlugin: (context: PiniaPluginContext) => void;
+import type { PiniaLasting } from '../types';
+export declare const piniaLasting: PiniaLasting;

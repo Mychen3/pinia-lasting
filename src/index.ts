@@ -1,4 +1,6 @@
-import type {PiniaPluginContext} from 'pinia'
+import type {PiniaPluginContext} from 'pinia';
+import type {PiniaLasting} from '../types'
+
 
 const mergeStoreObject = (options: PiniaPluginContext["options"]) => {
     if (!options.state) throw new Error('No current undefined state')
@@ -46,7 +48,7 @@ const subscribe = (storageKey: string, store: PiniaPluginContext["store"]) => {
     })
 }
 
-export const piniaLasting = (context: PiniaPluginContext) => {
+export const piniaLasting:PiniaLasting = (context: PiniaPluginContext):any => {
     const {store, options} = context
     const storeName: string = store.$id
 
@@ -54,7 +56,5 @@ export const piniaLasting = (context: PiniaPluginContext) => {
     const afterMerger = mergeStoreObject(options)
     moveStorage(storeName, store, afterMerger)
     subscribe(storeName, store)
+
 }
-
-
-
