@@ -1,0 +1,19 @@
+{
+  "name": "pinia-lasting",
+  "version": "1.0.0",
+  "main": "lib/pinia-lasting.cjs.js",
+  "keywords": [
+    "pinia",
+    "lasting"
+  ],
+  "scripts": {
+    "bulid": "rollup -c rollup.config.js"
+  },
+  "devDependencies": {
+    "pinia": "^2.0.13",
+    "rollup": "^2.70.1",
+    "rollup-plugin-typescript2": "^0.31.2",
+    "typescript": "^4.6.3"
+  },
+  "dependencies": {}
+}
