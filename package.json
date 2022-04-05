@@ -1,7 +1,8 @@
 {
   "name": "pinia-lasting",
-  "version": "1.0.0",
-  "main": "lib/pinia-lasting.cjs.js",
+  "version": "1.0.10",
+  "types": "lib/index.d.ts",
+  "main": "lib/pinia-lasting.esm.js",
   "keywords": [
     "pinia",
     "lasting"
