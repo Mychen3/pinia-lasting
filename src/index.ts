@@ -31,14 +31,13 @@ const moveStorage = (storageKey: string, store: PiniaPluginContext["store"], sto
 }
 
 
-const subscribe = (storageKey: string, store: PiniaPluginContext["store"]) => {
+const subscribe = ( store: PiniaPluginContext["store"]) => {
     store.$subscribe((subscribeObject) => {
-            const {newValue,key,oldValue} = subscribeObject.events
+            const {newValue,oldValue} = subscribeObject.events
             const storeId = subscribeObject.storeId
             if (subscribeObject.events.type !== 'set') return
             if (newValue !== oldValue) {
-                const target = subscribeObject.events.target
-                target[key] = newValue
+                const target = subscribeObject.events.effect.fn()
                 setStorage(storeId, target)
             }
     })
@@ -51,6 +50,6 @@ export const piniaLasting:PiniaLasting = (context: PiniaPluginContext):any => {
     if (!storeName) throw new Error('No current id')
     const afterMerger = mergeStoreObject(options)
     moveStorage(storeName, store, afterMerger)
-    subscribe(storeName, store)
+    subscribe(store)
 
 }
