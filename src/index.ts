@@ -31,19 +31,17 @@ const moveStorage = (storageKey: string, store: PiniaPluginContext["store"], sto
 }
 
 
-const subscribe = ( store: PiniaPluginContext["store"]) => {
-    store.$subscribe((subscribeObject) => {
-            const {newValue,oldValue} = subscribeObject.events
-            const storeId = subscribeObject.storeId
+const subscribe = (store: PiniaPluginContext["store"]) => {
+    store.$subscribe((subscribeObject, store) => {
+        const storeId = subscribeObject.storeId
+        if (subscribeObject.events) {
             if (subscribeObject.events.type !== 'set') return
-            if (newValue !== oldValue) {
-                const target = subscribeObject.events.effect.fn()
-                _.debounce(setStorage,300)(storeId, target)
-            }
+        }
+            _.debounce(setStorage, 300)(storeId, store)
     })
 }
 
-export const piniaLasting:PiniaLasting = (context: PiniaPluginContext):any => {
+export const piniaLasting: PiniaLasting = (context: PiniaPluginContext): any => {
     const {store, options} = context
     const storeName: string = store.$id
 
