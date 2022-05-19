@@ -1,6 +1,6 @@
 import type {PiniaPluginContext} from 'pinia';
 import type {PiniaLasting} from '../types'
-
+import _ from 'lodash'
 
 const mergeStoreObject = (options: PiniaPluginContext["options"]) => {
     if (!options.state) throw new Error('No current undefined state')
@@ -38,7 +38,7 @@ const subscribe = ( store: PiniaPluginContext["store"]) => {
             if (subscribeObject.events.type !== 'set') return
             if (newValue !== oldValue) {
                 const target = subscribeObject.events.effect.fn()
-                setStorage(storeId, target)
+                _.debounce(setStorage,300)(storeId, target)
             }
     })
 }
