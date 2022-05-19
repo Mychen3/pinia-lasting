@@ -1,6 +1,6 @@
 {
   "name": "pinia-lasting",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "types": "lib/index.d.ts",
   "main": "lib/pinia-lasting.esm.js",
   "keywords": [
@@ -11,6 +11,7 @@
     "bulid": "rollup -c rollup.config.js"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.182",
     "pinia": "^2.0.13",
     "rollup": "^2.70.1",
     "rollup-plugin-typescript2": "^0.31.2",
